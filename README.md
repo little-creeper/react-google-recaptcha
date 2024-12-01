@@ -2,7 +2,7 @@
 
 React 组件，用于 [Google reCAPTCHA v2][reCAPTCHA]。
 
-基于 (dozoisch/react-google-recaptcha)[https://github.com/dozoisch/react-google-recaptcha]
+基于[dozoisch/react-google-recaptcha](https://github.com/dozoisch/react-google-recaptcha)
 
 强制替换了验证服务地址为`recatptcha.net`用来规避GFW下使用`react-google-recaptcha`遇到的一些奇奇怪怪的问题，同时添加了TypeScript类型支持。
 
@@ -21,7 +21,7 @@ npm install --save react-recaptcha-net
 
 默认使用方式会导入一个封装的组件，异步加载 Google reCAPTCHA 脚本，然后初始化一个 `reCAPTCHA`，用户可以与之交互。
 
-示例代码：
+示例：
 ```jsx
 import ReCAPTCHA from "react-google-recaptcha";
 
@@ -66,9 +66,9 @@ ReactDOM.render(
 - `getWidgetId()`：返回 reCAPTCHA 小部件的 ID
 - `reset()`：强制重置。参见 [JavaScript API 文档][js_api]
 - `execute()`：程序化调用挑战
-  - 在使用 `"invisible"` reCAPTCHA 时需要调用 [示例](#invisible-recaptcha)
+  - 在使用 `"invisible"` reCAPTCHA 时需要调用
 - `executeAsync()`：程序化调用挑战，并返回一个 Promise，成功时返回令牌，出错时返回错误。
-  - 可与 `onChange()` 属性结合使用的另一种方法 [示例](#invisible-recaptcha)
+  - 可与 `onChange()` 属性结合使用的另一种方法
 
 示例：
 ```javascript
