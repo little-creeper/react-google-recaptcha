@@ -2,7 +2,7 @@
 
 React 组件，用于 [Google reCAPTCHA v2][reCAPTCHA]。
 
-基于(dozoisch/react-google-recaptcha)[https://github.com/dozoisch/react-google-recaptcha]
+基于 (dozoisch/react-google-recaptcha)[https://github.com/dozoisch/react-google-recaptcha]
 
 强制替换了验证服务地址为`recatptcha.net`用来规避GFW下使用`react-google-recaptcha`遇到的一些奇奇怪怪的问题，同时添加了TypeScript类型支持。
 
