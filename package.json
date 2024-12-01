@@ -1,6 +1,6 @@
 {
   "name": "react-recaptcha-net",
-  "version": "3.2.3",
+  "version": "3.2.4",
   "description": "",
   "main": "lib/index.js",
   "module": "lib/esm/index.js",
@@ -9,16 +9,16 @@
   "directories": {
     "lib": "lib/"
   },
-"scripts": {
-  "build": "rm -rf lib && npm run build:cjs && npm run build:esm && cp src/index.d.ts lib/index.d.ts",
-  "build:cjs": "babel src --out-dir lib",
-  "build:esm": "cross-env BABEL_ENV=esm babel src --out-dir lib/esm",
-  "prepare": "npm run build",
-  "pretty": "prettier --write src/*.js ./*.js test/*.js",
-  "lint": "eslint ./",
-  "lint:fix": "eslint ./ --fix",
-  "test": "cross-env BABEL_ENV=development jest"
-},
+  "scripts": {
+    "build": "rm -rf lib && npm run build:cjs && npm run build:esm && cp src/index.d.ts lib/index.d.ts",
+    "build:cjs": "babel src --out-dir lib",
+    "build:esm": "cross-env BABEL_ENV=esm babel src --out-dir lib/esm",
+    "prepare": "npm run build",
+    "pretty": "prettier --write src/*.js ./*.js test/*.js",
+    "lint": "eslint ./",
+    "lint:fix": "eslint ./ --fix",
+    "test": "cross-env BABEL_ENV=development jest"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/little-creeper/react-google-recaptcha.git"
