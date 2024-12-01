@@ -1,7 +1,7 @@
 {
   "name": "react-google-recaptcha",
   "version": "3.1.0",
-  "description": "React Component Wrapper for Google reCAPTCHA",
+  "description": "",
   "main": "lib/index.js",
   "module": "lib/esm/index.js",
   "directories": {
