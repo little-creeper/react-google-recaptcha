@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/little-creeper/react-google-recaptcha.git"
+    "url": "https://github.com/sectlying/react-google-recaptcha.git"
   },
   "keywords": [
     "react",
@@ -33,9 +33,9 @@
   "author": "sectlying <sectly@126.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/little-creeper/react-google-recaptcha/issues"
+    "url": "https://github.com/sectlying/react-google-recaptcha/issues"
   },
-  "homepage": "https://github.com/little-creeper/react-google-recaptcha",
+  "homepage": "https://github.com/sectlying/react-google-recaptcha",
   "peerDependencies": {
     "react": ">=16.4.1"
   },
