@@ -1,73 +1,73 @@
-# react-google-recaptcha
+# react-recaptcha-net
 
-[![Build Status][ci.img]][ci.url] [![npm version][npm.img]][npm.url] [![npm downloads][npm.dl.img]][npm.dl.url]
+React 组件，用于 [Google reCAPTCHA v2][reCAPTCHA]。
+强制替换了验证服务地址为`recatptcha.net`用来规避GFW下使用`react-google-recaptcha`遇到的一些奇奇怪怪的问题，同时添加了TypeScript类型。
 
-[![Edit react-google-recaptcha example](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/1y4zzjq37l)
+> 被一条龙服务过.jpg
 
-React component for [Google reCAPTCHA v2][reCAPTCHA].
 
-## Installation
+## 安装
 
 ```shell
-npm install --save react-google-recaptcha
+npm install --save react-recaptcha-net
 ```
 
-## Usage
+## 使用
 
-All you need to do is [sign up for an API key pair][signup]. You will need the client key then you can use `<ReCAPTCHA />`.
+首先，你需要 [注册一个 API 密钥对][signup]，获取客户端密钥后，便可以使用 `<ReCAPTCHA />`。
 
-The default usage imports a wrapped component that loads the google recaptcha script asynchronously then instantiates a `reCAPTCHA` the user can then interact with.
+默认使用方式会导入一个封装的组件，异步加载 Google reCAPTCHA 脚本，然后初始化一个 `reCAPTCHA`，用户可以与之交互。
 
-Code Example:
+示例代码：
 ```jsx
 import ReCAPTCHA from "react-google-recaptcha";
 
 function onChange(value) {
-  console.log("Captcha value:", value);
+  console.log("Captcha 值:", value);
 }
 
 ReactDOM.render(
   <ReCAPTCHA
-    sitekey="Your client site key"
+    sitekey="你的客户端站点密钥"
     onChange={onChange}
   />,
   document.body
 );
 ```
 
-### Component Props
+### 组件属性
 
-Properties used to customise the rendering:
+用于自定义渲染的属性：
 
-| Name | Type | Description |
-|:---- | ---- | ------ |
-| asyncScriptOnLoad | func | *optional* callback when the google recaptcha script has been loaded |
-| badge | enum | *optional* `bottomright`, `bottomleft` or `inline`. Positions reCAPTCHA badge. *Only for invisible reCAPTCHA* |
-| hl | string | *optional* set the hl parameter, which allows the captcha to be used from different languages, see [reCAPTCHA hl] |
-| isolated | bool | *optional* For plugin owners to not interfere with existing reCAPTCHA installations on a page. If true, this reCAPTCHA instance will be part of a separate ID space. *(__default:__ `false`)*
-| onChange | func | The function to be called when the user successfully completes the captcha |
-| onErrored | func | *optional* callback when the challenge errored, most likely due to network issues. |
-| onExpired | func | *optional* callback when the challenge is expired and has to be redone by user. By default it will call the onChange with null to signify expired callback. |
-| sitekey | string | The API client key |
-| size | enum | *optional* `compact`, `normal` or `invisible`. This allows you to change the size or do an invisible captcha |
-| stoken | string | *optional* set the stoken parameter, which allows the captcha to be used from different domains, see [reCAPTCHA secure-token] |
-| tabindex | number | *optional* The tabindex on the element *(__default:__ `0`)*
-| type | enum | *optional* `image` or `audio` The type of initial captcha *(__defaults:__ `image`)*
-| theme | enum | *optional* `light` or `dark` The theme of the widget *(__defaults:__ `light`)*. See [example][docs_theme]
+| 名称              | 类型    | 描述                                                         |
+|------------------|---------|------------------------------------------------------------|
+| asyncScriptOnLoad | func    | *可选* 在 Google reCAPTCHA 脚本加载完成后的回调函数               |
+| badge            | enum    | *可选* `bottomright`、`bottomleft` 或 `inline`，设置 reCAPTCHA 的徽标位置。*仅适用于不可见的 reCAPTCHA* |
+| hl               | string  | *可选* 设置 `hl` 参数，使 reCAPTCHA 支持多种语言。请参见 [reCAPTCHA hl] |
+| isolated         | bool    | *可选* 插件开发者用来避免与页面上已有的 reCAPTCHA 实例冲突。如果为 `true`，此 reCAPTCHA 实例将处于一个独立的 ID 空间。*（默认值：`false`）* |
+| onChange         | func    | 用户成功完成验证码后调用的函数                                 |
+| onErrored        | func    | *可选* 在挑战过程中出错时的回调，通常是由于网络问题。               |
+| onExpired        | func    | *可选* 在挑战过期后调用的回调，用户需要重新完成验证码。默认会调用 `onChange`，并传入 `null` 来表示过期回调。 |
+| sitekey          | string  | API 客户端密钥                                               |
+| size             | enum    | *可选* `compact`、`normal` 或 `invisible`，用来设置验证码的大小或使用不可见验证码 |
+| stoken           | string  | *可选* 设置 `stoken` 参数，使 reCAPTCHA 支持从不同域名使用。参见 [reCAPTCHA secure-token] |
+| tabindex         | number  | *可选* 元素的 tabindex *（默认值：`0`）*                       |
+| type             | enum    | *可选* `image` 或 `audio`，设置初始验证码的类型 *（默认值：`image`）* |
+| theme            | enum    | *可选* `light` 或 `dark`，设置小部件的主题 *（默认值：`light`）*。参见 [example][docs_theme] |
 
-### Component Instance API
+### 组件实例 API
 
-The component instance also has some utility functions that can be called. These can be accessed via `ref`.
+该组件实例还提供了一些可以调用的实用函数，可以通过 `ref` 访问。
 
-- `getValue()` returns the value of the captcha field
-- `getWidgetId()` returns the recaptcha widget Id
-- `reset()` forces reset. See the [JavaScript API doc][js_api]
-- `execute()` programmatically invoke the challenge
-  - need to call when using `"invisible"` reCAPTCHA - [example below](#invisible-recaptcha)
-- `executeAsync()` programmatically invoke the challenge and return a promise that resolves to the token or errors(if encountered).
-  - alternative approach to `execute()` in combination with the `onChange()` prop - [example below](#invisible-recaptcha)
+- `getValue()`：返回验证码字段的值
+- `getWidgetId()`：返回 reCAPTCHA 小部件的 ID
+- `reset()`：强制重置。参见 [JavaScript API 文档][js_api]
+- `execute()`：程序化调用挑战
+  - 在使用 `"invisible"` reCAPTCHA 时需要调用 [示例](#invisible-recaptcha)
+- `executeAsync()`：程序化调用挑战，并返回一个 Promise，成功时返回令牌，出错时返回错误。
+  - 可与 `onChange()` 属性结合使用的另一种方法 [示例](#invisible-recaptcha)
 
-Example:
+示例：
 ```javascript
 const recaptchaRef = React.createRef();
 ...
@@ -80,7 +80,7 @@ render() {
     <form onSubmit={this.onSubmit} >
       <ReCAPTCHA
         ref={recaptchaRef}
-        sitekey="Your client site key"
+        sitekey="你的客户端站点密钥"
         onChange={onChange}
       />
     </form>
@@ -88,13 +88,11 @@ render() {
 }
 ```
 
-### Invisible reCAPTCHA
+### 不可见 reCAPTCHA
 
-[▶ Codesandbox invisible example](https://codesandbox.io/s/gifted-cache-10q74jj593)
+参见 [reCAPTCHA 文档](https://developers.google.com/recaptcha/docs/invisible) 了解如何配置它。
 
-See the [reCAPTCHA documentation](https://developers.google.com/recaptcha/docs/invisible) to see how to configure it.
-
-With the invisible option, you need to handle things a bit differently. You will need to call the `execute` method yourself.
+使用不可见选项时，你需要以不同的方式处理。需要手动调用 `execute` 方法。
 
 ```jsx
 import ReCAPTCHA from "react-google-recaptcha";
@@ -106,7 +104,7 @@ ReactDOM.render(
     <ReCAPTCHA
       ref={recaptchaRef}
       size="invisible"
-      sitekey="Your client site key"
+      sitekey="你的客户端站点密钥"
       onChange={onChange}
     />
   </form>,
@@ -114,11 +112,10 @@ ReactDOM.render(
 );
 ```
 
-Additionally, you can use the `executeAsync` method to use a promise based approach.
+此外，你还可以使用 `executeAsync` 方法，以基于 Promise 的方式调用挑战。
 
 ```jsx
 import ReCAPTCHA from "react-google-recaptcha";
-
 
 const ReCAPTCHAForm = (props) => {
   const recaptchaRef = React.useRef();
@@ -126,7 +123,7 @@ const ReCAPTCHAForm = (props) => {
   const onSubmitWithReCAPTCHA = async () => {
     const token = await recaptchaRef.current.executeAsync();
 
-    // apply to form data
+    // 将令牌应用到表单数据
   }
 
   return (
@@ -134,11 +131,10 @@ const ReCAPTCHAForm = (props) => {
       <ReCAPTCHA
         ref={recaptchaRef}
         size="invisible"
-        sitekey="Your client site key"
+        sitekey="你的客户端站点密钥"
       />
     </form>
   )
-
 }
 
 ReactDOM.render(
@@ -147,82 +143,48 @@ ReactDOM.render(
 );
 ```
 
+### 高级用法
 
-### Advanced usage
-
-#### Global properties used by reCaptcha
-
-__useRecaptchaNet__: If google.com is blocked, you can set `useRecaptchaNet` to `true` so that the component uses recaptcha.net instead.
-
-__enterprise__: if you want to use Google Enterprise Recaptcha, instead of the free version, set `enterprise` to `true`.
-
-Example global properties:
-```js
-window.recaptchaOptions = {
-  useRecaptchaNet: true,
-  enterprise: true,
-};
-```
-
-### CSP Nonce support
+### CSP Nonce 支持
 ```js
 window.recaptchaOptions = {
   nonce: document.querySelector('meta[name=\'csp-nonce\']').getAttribute('content'),
 };
 ```
 
-#### ReCaptcha loading google recaptcha script manually
+#### 手动加载 Google reCAPTCHA 脚本
 
-You can also use the barebone components doing the following. Using that component will oblige you to manage the grecaptcha dep and load the script by yourself.
+你也可以使用裸组件来手动加载脚本。使用该组件时，你需要自己管理 grecaptcha 依赖并手动加载脚本。
 
 ```jsx
 import { ReCAPTCHA } from "react-google-recaptcha";
 
-const grecaptchaObject = window.grecaptcha // You must provide access to the google grecaptcha object.
+const grecaptchaObject = window.grecaptcha; // 必须提供对 Google grecaptcha 对象的访问。
 
 render(
   <ReCAPTCHA
     ref={(r) => this.recaptcha = r}
-    sitekey="Your client site key"
+    sitekey="你的客户端站点密钥"
     grecaptcha={grecaptchaObject}
   />,
   document.body
 );
 ```
 
-#### Hiding the Recaptcha
+#### 隐藏 reCAPTCHA
 
-According to the [google docs](https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed) you are allowed to hide the badge as long as you include the reCAPTCHA branding visibly in the user flow. Please include the following text:
+根据 [Google 文档](https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed)，如果你在用户流程中明确显示 reCAPTCHA 品牌，允许隐藏徽标。
 
+请添加以下文本：
+
+```html
+此站点受 reCAPTCHA 保护，适用 Google
+    <a href="https://policies.google.com/privacy">隐私政策</a> 和
+    <a href="https://policies.google.com/terms">服务条款</a>。
 ```
-This site is protected by reCAPTCHA and the Google
-    <a href="https://policies.google.com/privacy">Privacy Policy</a> and
-    <a href="https://policies.google.com/terms">Terms of Service</a> apply.
-```
 
-If you wish to hide the badge you must add:
+如果你希望隐藏logo，可以在 CSS 中添加以下内容：
 
-```
+```css
 .grecaptcha-badge { visibility: hidden; }
-
 ```
-
-to your css.
-
-
-
-[ci.img]: https://github.com/dozoisch/react-google-recaptcha/actions/workflows/standard-ci.yml/badge.svg?branch=master
-[ci.url]: https://github.com/dozoisch/react-google-recaptcha/actions/workflows/standard-ci.yml
-[npm.img]: https://badge.fury.io/js/react-google-recaptcha.svg
-[npm.url]: http://badge.fury.io/js/react-google-recaptcha
-[npm.dl.img]: https://img.shields.io/npm/dm/react-google-recaptcha.svg
-[npm.dl.url]: https://www.npmjs.com/package/react-google-recaptcha
-
-[reCAPTCHA]: https://developers.google.com/recaptcha/docs/display
-[signup]: http://www.google.com/recaptcha/admin
-[docs]: https://developers.google.com/recaptcha
-[docs_theme]: https://developers.google.com/recaptcha/docs/faq#can-i-customize-the-recaptcha-widget
-[js_api]: https://developers.google.com/recaptcha/docs/display#js_api
-[rb]: https://github.com/react-bootstrap/react-bootstrap/
-[reCAPTCHA secure-token]: https://developers.google.com/recaptcha/docs/secure_token
-[reCAPTCHA hl]: https://developers.google.com/recaptcha/docs/language
